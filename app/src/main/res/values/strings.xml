@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ComposeD</string>
+    <string name="setting_wifi_title">WIFI</string>
+    <string name="setting_wifi_connecting">Connecting</string>
+    <string name="connected">Connected</string>
+    <string name="wifi_setting_item_saved">Saved</string>
+</resources>
