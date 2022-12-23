@@ -16,12 +16,9 @@ import android.util.Log
 import androidx.annotation.MainThread
 import androidx.collection.ArraySet
 import com.vivid.launcher.home.v2.dashboard.setting.detail.wifi.data.WifiData
-import com.vivid.launcher.home.v2.dashboard.setting.detail.wifi.data.packedAsWifiInfo
-import com.xixi.composed.AppApplication
 import java.nio.channels.ClosedSelectorException
 import java.security.InvalidParameterException
 import java.util.*
-import java.util.concurrent.Executors
 import kotlin.concurrent.thread
 
 /**

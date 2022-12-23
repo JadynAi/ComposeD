@@ -14,15 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.vivid.launcher.home.v2.dashboard.setting.detail.wifi.data.source.WifiRepository
+import com.xixi.composed.custom.TestCustomCompose
 import com.xixi.composed.ui.theme.ComposeDTheme
-import com.xixi.composed.wifi.ui.WifiApp
 
 class BeastChessActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WifiApp()
-//            Greeting()
+            WifiRepository.isWifiOpen
+            BaseWidgetTest()
         }
     }
 }
