@@ -44,7 +44,7 @@ fun Greeting() {
         val dp = 50.dp.toPx()
         val center1 = this.center
         drawCircle(color = Color.Blue, radius = dp)
-        val d = -30.0
+        val d = 30.0
         val x = center1.x + dp * cos(d * Math.PI / 180)
         val y = center1.y + dp * sin(d * Math.PI / 180)
         drawCircle(color = Color.Red, radius = 5.dp.toPx(), center = Offset(x.toFloat(), y.toFloat()))
