@@ -67,7 +67,7 @@ fun WaterDropAnim(modifier: Modifier = Modifier) {
             val gapDis = 80.dp.toPx()
             val transition = updateTransition(targetState = currentState, label = "Water")
 
-            val durationMillis = 1000
+            val durationMillis = 1111
             val progress by transition.animateFloat(label = "Water", transitionSpec = {
                 when {
                     WaterState.Circle isTransitioningTo WaterState.Bubble ->
@@ -135,6 +135,7 @@ private fun DrawScope.circleTransitionToBubble(
 
     val linearChangedBubbleRadius = pointRadius + (bubbleRadius - pointRadius) * linearProgress
     val currentBubbleRadius = pointRadius + (bubbleRadius - pointRadius) * progress
+    Log.d("cecece", "circleTransitionToBubble linearProgress: $linearProgress")
 
     val angel = 30.0
 
@@ -156,11 +157,11 @@ private fun DrawScope.circleTransitionToBubble(
     val iFixCircleEndX = fixCircleCenterX + currentCircleRadius * cos((180 - circleAngel) * Math.PI / 180).toFloat()
     val iFixCircleEndY = fixCircleCenterY + currentCircleRadius * sin((180 - circleAngel) * Math.PI / 180).toFloat()
 
-    drawCircle(color = Color.Red, radius = 3.dp.toPx(), center = Offset(iFixCircleStartX, iFixCircleStartY))
-    drawCircle(color = Color.Red, radius = 3.dp.toPx(), center = Offset(iFixCircleEndX, iFixCircleEndY))
-
-    drawCircle(color = Color.Blue, radius = 3.dp.toPx(), center = Offset(iBubStartX, iBubStartY))
-    drawCircle(color = Color.Blue, radius = 3.dp.toPx(), center = Offset(iBubEndX, iBubEndY))
+//    drawCircle(color = Color.Red, radius = 3.dp.toPx(), center = Offset(iFixCircleStartX, iFixCircleStartY))
+//    drawCircle(color = Color.Red, radius = 3.dp.toPx(), center = Offset(iFixCircleEndX, iFixCircleEndY))
+//
+//    drawCircle(color = Color.Blue, radius = 3.dp.toPx(), center = Offset(iBubStartX, iBubStartY))
+//    drawCircle(color = Color.Blue, radius = 3.dp.toPx(), center = Offset(iBubEndX, iBubEndY))
 //    val iFixCircleStartX = fixCircleCenterX - currentCircleRadius
 //    val iFixCircleStartY = fixCircleCenterY
 //
@@ -209,7 +210,8 @@ private fun DrawScope.bubbleTransitionToCircle(
 
     val currentBubbleRadius = bubbleRadius * (1f - circleProgress)
 
-    val angel = -30.0 + (30.0 * (if (animProgress <= 1f) 0f else ((animProgress - 1f) / 0.2f)))
+//    val angel = -30.0 + (30.0 * (if (animProgress <= 1f) 0f else ((animProgress - 1f) / 0.2f)))
+    val angel = -30.0 + (30.0 * animProgress / 1.2f)
     Log.d("cecece", "bubbleTransitionToCircle: $angel")
 
     val iBubStartX = bubbleCenterX + currentBubbleRadius * cos(angel * Math.PI / 180)
