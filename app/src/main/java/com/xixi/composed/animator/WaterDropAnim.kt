@@ -28,13 +28,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.w3c.dom.Text
 import java.lang.Float.max
 import kotlin.math.cos
 import kotlin.math.sin
 
 
 @Composable
+@Preview
 fun WaterDropAnim(modifier: Modifier = Modifier) {
     var currentState by remember { mutableStateOf<WaterState>(WaterState.Circle) }
     Box(
