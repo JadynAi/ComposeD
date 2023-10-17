@@ -1,32 +1,34 @@
 package com.xixi.composed
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.animateDecay
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.xixi.composed.animator.WaterDropAnim
-import org.w3c.dom.Text
-import java.io.FileOutputStream
+import coil.compose.AsyncImage
+import com.xixi.composed.animator.FlickerAnimate
+import com.xixi.composed.ui.DismissibleAppBar
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -34,7 +36,17 @@ class BeastChessActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestMutableState()
+//            FlickerAnimate(
+//                Modifier
+//                    .width(200.dp)
+//                    .height(50.dp)
+//                    .background(Color.Yellow)
+//            )
+//
+//            AsyncImage(model = "", contentDescription = "")
+            
+//            Greeting()
+            DismissibleAppBar()
         }
     }
 }
@@ -44,33 +56,68 @@ class BeastChessActivity : ComponentActivity() {
 fun TestMutableState() {
     Column {
         Log.d("cecece", "TestMutableState: refresh top")
-        Text(text = "dasdasdasd", modifier = Modifier
-            .width(100.dp)
-            .height(100.dp))
+        Text(
+            text = "dasdasdasd", modifier = Modifier
+                .width(100.dp)
+                .height(100.dp)
+        )
         Log.d("cecece", "TestMutableState: refresh after das")
         var count by mutableStateOf(1)
         Log.d("cecece", "TestMutableState: refresh state")
-        Text(text = "haha$count", modifier = Modifier.clickable { 
+        Text(text = "haha$count", modifier = Modifier.clickable {
             count++
         })
     }
 }
 
-
 @Composable
 fun Greeting() {
-    Canvas(modifier = Modifier.fillMaxSize(), onDraw = {
-        val dp = 50.dp.toPx()
-        val center1 = this.center
-        drawCircle(color = Color.Blue, radius = dp)
-        val d = 30.0
-        val x = center1.x + dp * cos(d * Math.PI / 180)
-        val y = center1.y + dp * sin(d * Math.PI / 180)
-        drawCircle(color = Color.Red, radius = 5.dp.toPx(), center = Offset(x.toFloat(), y.toFloat()))
-        val x1 = center1.x + dp * cos((180 - d) * Math.PI / 180)
-        val y1 = center1.y + dp * sin((180 - d) * Math.PI / 180)
-        drawCircle(color = Color.Yellow, radius = 5.dp.toPx(), center = Offset(x1.toFloat(), y1.toFloat()))
-    })
+    var s by remember {
+        mutableStateOf(1)
+    }
+    val transitionAnimation = remember() { Animatable(initialValue = 0f) }
+
+    LaunchedEffect(Unit) {
+        transitionAnimation.animateTo(1f, animationSpec = TweenSpec<Float>(durationMillis = 300, easing = LinearEasing))
+    }
+    Canvas(modifier = Modifier.fillMaxSize()
+        .clickable { s++ }
+    ) {
+        drawIntoCanvas {
+            drawRect(
+                color = Color(0xffC9ADFF),
+                topLeft = Offset(0f, 0f),
+                size = Size(100f, 100f)
+            )
+            drawRect(
+                color = Color(0xffC9ADFF).copy(alpha = 0.48f),
+                topLeft = Offset(0f, 100f),
+                size = Size(100f, size.height)
+            )
+
+            drawRect(
+                color = Color(0xffC9ADFF),
+                topLeft = Offset(200f, 0f),
+                size = Size(100f, 100f)
+            )
+            drawRect(
+                color = Color(0xffC9ADFF).copy(alpha = 0.48f),
+                topLeft = Offset(200f, 100f),
+                size = Size(100f, size.height * 0.5f)
+            )
+
+            drawRect(
+                color = Color(0xffC9ADFF),
+                topLeft = Offset(400f, 100f),
+                size = Size(100f, 100f)
+            )
+            drawRect(
+                color = Color(0xffC9ADFF).copy(alpha = 0.48f),
+                topLeft = Offset(400f, 100f),
+                size = Size(100f, size.height * 0.2f)
+            )
+        }
+    }
 }
 
 @Composable
