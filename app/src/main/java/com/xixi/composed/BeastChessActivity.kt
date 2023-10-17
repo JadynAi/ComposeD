@@ -9,7 +9,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -26,11 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import com.xixi.composed.animator.FlickerAnimate
-import com.xixi.composed.ui.DismissibleAppBar
-import kotlin.math.cos
-import kotlin.math.sin
 
 class BeastChessActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +40,6 @@ class BeastChessActivity : ComponentActivity() {
 //            AsyncImage(model = "", contentDescription = "")
             
 //            Greeting()
-            DismissibleAppBar()
         }
     }
 }
